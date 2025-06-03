@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rincón Pedagógico</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: #f9fafb;  
+      color: #111827;
+    }
+    header {
+      background: linear-gradient(to right, #10b981, #34d399);
+      color: white;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    /* Menú desplegable */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropbtn {
+      background: transparent;
+      color: white;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #ffffff;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+      z-index: 10;
+      right: 0;
+      top: 1.5rem;
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
+
+    .dropdown-content a {
+      color: #111827;
+      padding: 0.75rem 1.25rem;
+      text-decoration: none;
+      display: block;
+      font-weight: 500;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #ecfdf5;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    section {
+      display: none;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .home {
+      text-align: center;
+    }
+
+    .home h2 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+    }
+
+    .home .author {
+      font-style: italic;
+      font-size: 1.25rem;
+      color: #4b5563;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .home p {
+      font-size: 1.1rem;
+      color: #6b7280;
+      max-width: 700px;
+      margin: auto;
+      margin-bottom: 2rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+      color: white;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+
+    /* Colores personalizados */
+    .card.video { 
+      background: linear-gradient(to bottom right, #3b82f6, #2563eb); 
+    }
+
+    .card.teorico { 
+      background: linear-gradient(to bottom right, #8b5cf6, #6d28d9); 
+    }
+
+    .card.eval { 
+      background: linear-gradient(to bottom right, #ec4899, #db2777); 
+    }
+
+    .card.flipbook { 
+      background: linear-gradient(to bottom right, #f97316, #ea580c); 
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      margin-top: 0.5rem;
+      font-weight: 600;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #f9fafb !important;
+      opacity: 0.95;
+      margin-top: 0.5rem;
+    }
+
+    .section {
+      text-align: center;
+      margin-top: 4rem;
+    }
+
+    .section h2 {
+      font-size: 2.25rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+    }
+
+    .section p {
+      font-size: 1.1rem;
+      color: #4b5563;
+      max-width: 700px;
+      margin: auto;
+      margin-bottom: 2rem;
+    }
+
+    .buttons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .btn {
+      background: #3b82f6;
+      color: white;
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      white-space: pre-line;
+      text-align: center;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+
+    .btn.video { 
+      background: linear-gradient(to right, #3b82f6, #2563eb); 
+    }
+
+    .btn.teorico { 
+      background: linear-gradient(to right, #8b5cf6, #6d28d9); 
+    }
+
+    .btn.eval { 
+      background: linear-gradient(to right, #ec4899, #db2777); 
+    }
+
+    .back-btn {
+      margin-top: 2rem;
+      background: #6366f1;
+      padding: 0.75rem 2rem;
+      border-radius: 9999px;
+      font-weight: bold;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    .back-btn:hover {
+      background: #4f46e5;
+    }
+
+    footer {
+      background-color: #111827;
+      color: #9ca3af;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">Rincón Pedagógico</div>
+    <nav>
+      <!-- Menú desplegable -->
+      <div class="dropdown">
+        <button class="dropbtn">Menú ▼</button>
+        <div class="dropdown-content">
+          <a href="#" onclick="showSection('home')">Inicio</a>
+          <a href="#" onclick="showSection('videos')">Videos</a>
+          <a href="#" onclick="showSection('respaldo')">Respaldo Teórico</a>
+          <a href="#" onclick="showSection('evaluaciones')">Evaluaciones</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Home Section -->
+    <section id="home" class="home active">
+      <h2><img src="https://github.com/LuiguiP11/EPE/blob/main/CUNOR-USAC%20LOGO_SIN%20FONDO_NEGRO.png?raw=true" alt="logo" width="252" height="112"></h2>
+      <h2>Bienvenidos al Rincón Pedagógico</h2>
+      <p class="author">de Lcda. Aura Natalia Fernández García</p>
+      <p class="author"><img src="https://github.com/LuiguiP11/EPE/blob/main/NAT1.png?raw=true" width="100" height="100" alt="foto"></p>
+      <p>Explora recursos educativos dinámicos, teóricos y evaluativos para docentes y estudiantes.</p>
+      <!-- Cards -->
+      <div class="cards">
+        <div class="card video" onclick="showSection('videos')">
+          🎥<br/>
+          <h3>Videos Educativos</h3>
+          <p>Accede a contenido visual interactivo.</p>
+        </div>
+        <div class="card teorico" onclick="showSection('respaldo')">
+          📚<br/>
+          <h3>Respaldo Teórico</h3>
+          <p>Fundamentos pedagógicos y artículos.</p>
+        </div>
+        <div class="card eval" onclick="showSection('evaluaciones')">
+          📝<br/>
+          <h3>Evaluaciones Formativas</h3>
+          <p>Recursos para evaluar sin presión.</p>
+        </div>
+        <!-- Tarjeta FlipBook -->
+        <div class="card flipbook" onclick="window.open('https://anyflip.com/zpmce/jffg/', '_blank')">
+          📘<br/>
+          <h3>FlipBook</h3>
+          <p>Recurso interactivo en formato digital.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Videos Section -->
+    <section id="videos" class="section">
+      <h2 style="color: #3b82f6;">Sección: Videos</h2> 
+      <p>Accede a recursos visuales educativos diseñados para docentes y estudiantes.</p>
+      <div class="buttons-grid" id="videos-buttons"></div>
+      <button class="back-btn" onclick="showSection('home')">← Volver al Inicio</button>
+    </section>
+
+    <!-- Respaldo Teórico Section -->
+    <section id="respaldo" class="section">
+      <h2 style="color: #8b5cf6;">Sección: Respaldo Teórico</h2>
+      <p>Encuentra fundamentos pedagógicos, investigaciones y artículos clave para tu práctica docente.</p>
+      <div class="buttons-grid" id="respaldo-buttons"></div>
+      <button class="back-btn" onclick="showSection('home')">← Volver al Inicio</button>
+    </section>
+
+    <!-- Evaluaciones Section -->
+    <section id="evaluaciones" class="section">
+      <h2 style="color: #ec4899;">Sección: Evaluaciones</h2>
+      <p>Recursos interactivos y formativos para evaluar sin presión ni estrés.</p>
+      <div class="buttons-grid" id="evaluaciones-buttons"></div>
+      <button class="back-btn" onclick="showSection('home')">← Volver al Inicio</button>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© <span id="year"></span> Jhiro's Designe. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    const sections = ['home', 'videos', 'respaldo', 'evaluaciones'];
+
+    function showSection(section) {
+      sections.forEach(sec => {
+        document.getElementById(sec).classList.remove('active');
+      });
+      document.getElementById(section).classList.add('active');
+      window.location.hash = section;
+    }
+
+    window.onload = () => {
+      const hash = window.location.hash.replace('#', '');
+      if (sections.includes(hash)) {
+        showSection(hash);
+      } else {
+        showSection('home');
+      }
+
+      // Año actual en el footer
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Datos de los botones
+      const videosLinks = [
+        { name: "1_Lista de Cotejo", url: "https://acortar.link/fH1JEO"  },
+        { name: "2_Escala de calificaciones", url: "https://acortar.link/74qgsx"  },
+        { name: "3_La Rubrica", url: "https://www.youtube.com/watch?v=UTeiNh6SlyM" },
+        { name: "4_El Simposio", url: "https://acortar.link/kPtFjP" },
+        { name: "5_El Portafolio", url: "https://acortar.link/Mp2aUj" },
+        { name: "6_El Informe", url: "https://acortar.link/6SQ2Ow" },
+        { name: "7_Texto Paralelo", url: "https://acortar.link/gCVQGO" },
+        { name: "8_El Proyecto", url: "https://acortar.link/K1Mq17" },
+        { name: "9_El Ensayo", url: "https://acortar.link/FMGI6C" },
+        { name: "10_El Debate", url: "https://acortar.link/Pb467r" },
+        { name: "11_El Omiaro", url: "https://acortar.link/jb9S5m" },
+        { name: "12_Estudio de Casos", url: "https://acortar.link/CLIv7u" },
+        { name: "13_La Mesa Redonda", url: "https://acortar.link/vI7i42" },
+        { name: "14_Clase Espejo", url: "https://acortar.link/2awObf" },
+        { name: "15_En construcción", url: "#" }, 
+        { name: "16_El Crucigrama", url: "https://acortar.link/9OJVI0"  },
+        { name: "17_Gamificacion", url: "https://www.youtube.com/watch?v=5OnNUo7NL_0" },
+        { name: "18_Rompecabezas", url: "https://acortar.link/3nn74C" },
+        { name: "19_Estudio de Casos Estudiantes", url: "https://acortar.link/d9zg0h" },
+        { name: "20_Diarios de evaluación del aprendizaje", url: "https://acortar.link/qkDJ3x" },
+        { name: "21_Contrato de evaluación del aprendizaje", url: "https://acortar.link/rlBgus" }
+      ];
+
+      const respaldoLinks = [
+        { name: "1_Lista de Cotejo", url: "https://drive.google.com/file/d/115SXSex_j7eIu2YAGTWilt7-vtmPWElF/view?usp=drive_link" },
+        { name: "2_Escala de calificaciones", url: "https://drive.google.com/file/d/1ixjj27wldr3tU2DKYQ8RxzOM_JSB-gyV/view?usp=drive_link" },
+        { name: "3_La Rubrica", url: "https://drive.google.com/file/d/1gXu9IJbfqO-r6pQ7nVdVrMuh1l_jkOGr/view?usp=drive_link" },
+        { name: "4_El Simposio", url: "https://drive.google.com/file/d/188TsPwXJR5UWHU32s9WYacPnKqp5IaPl/view?usp=drive_link" },
+        { name: "5_El Portafolio", url: "https://drive.google.com/file/d/1U8fQ9QpY4TS8vD4US9NO4UhyzMK82c2G/view?usp=drive_link" },
+        { name: "6_El Informe", url: "https://drive.google.com/file/d/1PfbTQm-xyip9OyperLrAjJTxWc82qOG4/view?usp=drive_link" },
+        { name: "7_Texto Paralelo", url: "https://drive.google.com/file/d/1lFoJy3HP7vEy2twH6mljPRjUUfW20kJ/view?usp=drive_link" },
+        { name: "8_El Proyecto", url: "https://drive.google.com/file/d/1zKwoN_gehQsRxX91yBWOT5FOQVO-SVXE-/view?usp=drive_link" },
+        { name: "9_El Ensayo", url: "https://drive.google.com/file/d/1RYA_7URd0QPqDkgru3HiHgUXtEu-k_jA/view?usp=drive_link" },
+        { name: "10_El Debate", url: "https://drive.google.com/file/d/1Q6O6n0fUyjTwFt82ArZdueG--69DnM3H/view?usp=drive_link" },
+        { name: "11_El Omiaro", url: "https://drive.google.com/file/d/131Vo0ZEvfmu5GXr23hO_YaDQ59q7fPYx/view?usp=drive_link" },
+        { name: "12_Estudio de Casos", url: "https://drive.google.com/file/d/1AJvgar7WsV8sPZQAHSowVcKK8tZ1A8QP/view?usp=drive_link" },
+        { name: "13_La Mesa Redonda", url: "https://drive.google.com/file/d/1kPNGyEblnZF_6LPPU18bnm6hscdGRWgE/view?usp=drive_link" },
+        { name: "14_Clase Espejo", url: "https://drive.google.com/file/d/1yOxK7HhwaZoZvSPSw_o6ycGZOmJg11U0/view?usp=drive_link" },
+        { name: "15_Preguntas falsas", url: "https://drive.google.com/file/d/1CWQ2zgEc6iJKPAV03FmlX-acAncz4Cv7/view?usp=drive_link" },
+        { name: "16_El Crucigrama", url: "https://drive.google.com/file/d/1vGxy-w3ncxf0zGT24ZfMzBNRUIGghhZi/view?usp=drive_link" },
+        { name: "17_Gamificacion", url: "https://drive.google.com/file/d/1DJ_yu7ID59kLkrYxPw0MjvQdmrQEiy0-/view?usp=drive_link" },
+        { name: "18_Rompecabezas", url: "https://drive.google.com/file/d/1ViIdVKsOZzb9Z4fzrqfJeCSaFiacu1Jd/view?usp=drive_link" },
+        { name: "19_Estudio de Casos Estudiantes", url: "https://drive.google.com/file/d/1WCUmEPh8bkZSeBVnv7Q7z-IIyqEm8YMj/view?usp=drive_link" },
+        { name: "20_Diarios de evaluación del aprendizaje", url: "https://drive.google.com/file/d/1T9zvknwdUPENuprUK8EYzqwV0DbWqSpT/view?usp=drive_link" },
+        { name: "21_Contrato de evaluación del aprendizaje", url: "https://drive.google.com/file/d/1K8r0j5MRc9nh0N3jS4hAMSTQh8mymigN/view?usp=drive_link" }
+      ];
+
+      const evaluacionesLinks = [
+        { name: "1_Lista de Cotejo", url: "https://luiguip11.github.io/1_Lista-de-Cotejo/" },
+        { name: "2_Escala de calificaciones", url: "https://luiguip11.github.io/2_Escalas-de-Calificaci-n/" },
+        { name: "3_La Rubrica", url: "https://luiguip11.github.io/3_La-R-brica/" },
+        { name: "4_El Simposio", url: "https://luiguip11.github.io/4_El-Simposio/" },
+        { name: "5_El Portafolio", url: "https://luiguip11.github.io/5_El-Portafolio/" },
+        { name: "6_El Informe", url: "https://luiguip11.github.io/6_El-Informe/" },
+        { name: "7_Texto Paralelo", url: "https://luiguip11.github.io/7_El-Texto-Paralelo/" },
+        { name: "8_El Proyecto", url: "https://luiguip11.github.io/8_El-Proyecto/" },
+        { name: "9_El Ensayo", url: "https://luiguip11.github.io/9_El-Ensayo/" },
+        { name: "10_El Debate", url: "https://luiguip11.github.io/10_El-Debate/" },
+        { name: "11_El Omiaro", url: "https://luiguip11.github.io/11_El-Omiaro/" },
+        { name: "12_Estudio de Casos", url: "https://luiguip11.github.io/12_Estudio-de-Casos/" },
+        { name: "13_La Mesa Redonda", url: "https://luiguip11.github.io/13_La-Mesa-Redonda/" },
+        { name: "14_Clase Espejo", url: "https://luiguip11.github.io/14_Clase-Espejo/" },
+        { name: "15_Preguntas falsas", url: "https://luiguip11.github.io/15_Preguntas-falsas/" },
+        { name: "16_El Crucigrama", url: "https://luiguip11.github.io/16_El-Crucigrama/" },
+        { name: "17_Gamificacion", url: "https://luiguip11.github.io/17_Gamificacion/" },
+        { name: "18_Rompecabezas", url: "https://luiguip11.github.io/18_Rompecabezas/" },
+        { name: "19_Estudio de Casos Estudiantes", url: "https://luiguip11.github.io/19_Estudio-de-Casos-Estudiantes/" },
+        { name: "20_Diarios de evaluación del aprendizaje", url: "https://luiguip11.github.io/20_Diarios-de-evaluaci-n-del-aprendizaje/" },
+        { name: "21_Contrato de evaluación del aprendizaje", url: "https://luiguip11.github.io/21_Contrato-de-evaluaci-n-del-aprendizaje/" }
+      ];
+
+      function createButtons(containerId, links) {
+        const container = document.getElementById(containerId);
+        links.forEach(item => {
+          const btn = document.createElement("button");
+          btn.className = "btn";
+          if (containerId === "videos-buttons") btn.classList.add("video");
+          if (containerId === "respaldo-buttons") btn.classList.add("teorico");
+          if (containerId === "evaluaciones-buttons") btn.classList.add("eval");
+          btn.textContent = item.name;
+          btn.onclick = () => {
+            if (item.url && item.url !== "#") window.open(item.url, '_blank'); 
+          };
+          container.appendChild(btn);
+        });
+      }
+
+      createButtons("videos-buttons", videosLinks);
+      createButtons("respaldo-buttons", respaldoLinks);
+      createButtons("evaluaciones-buttons", evaluacionesLinks);
+    }
+  </script>
+</body>
+</html>
